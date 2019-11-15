@@ -1,0 +1,17 @@
+/**
+* Mux chip: If sel=0 then out=a else out=b.
+* Logic D1S + D0notS + D0D1S
+        D0notS + D1S
+
+**/
+
+CHIP Mux {
+	IN a, b, sel;
+	OUT out;
+
+	PARTS:
+	Not(a=sel, out=nsel);
+	And(a=a, b=nsel, out=c1);
+	And(a=b, b=sel, out=c2);
+	Or(a=c1, b=c2, out=out);
+}
